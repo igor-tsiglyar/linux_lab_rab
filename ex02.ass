@@ -1,0 +1,15 @@
+EX02     START 0            Begin of the program                               
+         BALR  RBASE,0      Load base register                                 
+         USING *,RBASE      Set register as base                               
+         L     RRAB,A       Load variable to register                          
+         O     RRAB,B       Compose intermediate result                        
+         N     RRAB,C       Compose intermediate result                        
+         ST    RRAB,D       Compose the logical expression result              
+         BCR   15,14        Exit the program                                   
+A        DC    B'101'       Variable definition                                
+B        DC    B'1010'      Variable definition                                
+C        DC    B'111'       Variable definition                                
+D        DC    B'0'         Variable definition                                
+RBASE    EQU   15                                                              
+RRAB     EQU   5                                                               
+         END   EX02         End of the program                                 

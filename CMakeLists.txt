@@ -1,5 +1,6 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 2.8)
 
 project(linux_lab_rab)
+set(CMAKE_C_FLAGS "-std=c99")
 
 add_executable(komppl komppl.c)
