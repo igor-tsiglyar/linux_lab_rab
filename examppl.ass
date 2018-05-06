@@ -1,0 +1,15 @@
+EXAMP    START 0            Begin of the program                               
+         BALR  RBASE,0      Load base register                                 
+         USING *,RBASE      Set register as base                               
+         L     RRAB,A       Load variable to register                          
+         A     RRAB,B       Compose intermediate result                        
+         S     RRAB,C       Compose intermediate result                        
+         ST    RRAB,D       Compose the arithmetic expression result           
+         BCR   15,14        Exit the program                                   
+A        DC    F'3'         Variable definition                                
+B        DC    F'4'         Variable definition                                
+C        DC    F'5'         Variable definition                                
+D        DC    F'0'         Variable definition                                
+RBASE    EQU   15                                                              
+RRAB     EQU   5                                                               
+         END   EXAMP        End of the program                                 
