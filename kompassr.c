@@ -492,24 +492,20 @@ int SDC()                                         /*подпр.обр.пс.оп�
    }
   else if (strncmp (TEK_ISX_KARTA.STRUCT_BUFCARD.OPERAND, "BL4", 3) == 0)
    {
-       RAB=strtok ((char*)TEK_ISX_KARTA.STRUCT_BUFCARD.OPERAND+4, "'");
-       char tmp_str[16];
-       int i = 0;
-       for (i = 0; i < 16; i++) {
-           tmp_str[i] = 0x00;
-       }
-       i = 0;
-       while (*RAB) {
-           tmp_str[i++] = *RAB++;
-       }
-       unsigned char tmp_val = 0;
-       for (i = 0; i < 16; i++) {
-           if (tmp_str[i] == '1') {
-               tmp_val |= (0x01 >> i);
+       RAB=strtok ((char*)TEK_ISX_KARTA.STRUCT_BUFCARD.OPERAND + 4, "'");
+
+       short dec_val = 0;
+       int i;
+       for (i = 0; RAB[i]; ++i) {
+           if (RAB[i] == '1') {
+               dec_val = dec_val * 2 + 1;
+           } else {
+               dec_val *= 2;
            }
        }
-       RR.OP_RR.OP = tmp_val;
-       RR.OP_RR.R1R2 = 0;//tmp_val;
+       RX.OP_RX.B2D2 = dec_val;                   /*перевод ASCII-> int     */
+       RAB = (char *) &RX.OP_RX.B2D2;             /*приведение к соглашениям*/
+       swab ( RAB , RAB , 2 );                    /* ЕС ЭВМ                 */
        STXT (4);                                  /*формирование TXT-карты  */
    }
   else                                            /*иначе                   */
